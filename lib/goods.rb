@@ -1,5 +1,9 @@
 require "goods/version"
+require "goods/xml"
+require "goods/category"
+require "goods/offer"
+require "goods/catalog"
 
 module Goods
-  # Your code goes here...
+
 end
