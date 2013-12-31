@@ -115,7 +115,7 @@ describe Goods::XML do
       end
 
       it "should have default availability status" do
-        book[:available].should == true
+        printer[:available].should == true
       end
 
       it "should have a URL which is not empty" do
@@ -127,19 +127,19 @@ describe Goods::XML do
       end
 
       it "should have a price" do
-        printer[:price].should == 15000
+        printer[:price].should == 15000.00
       end
 
       it "should have a currency_id" do
         printer[:currency_id].should == "RUR"
       end
 
-      it "should have a category_id" do
-        printer[:category_id].should == "101"
+      it "should use first category_id" do
+        printer[:category_id].should == "100"
       end
 
-      it "should have a non-empty picture if one exists" do
-        printer[:picture].should == "http://magazin.ru/img/device14344.jpg"
+      it "should use first picture if there at least one" do
+        printer[:picture].should == "http://magazin.ru/img/device1.jpg"
       end
 
       it "should have a nil picture if offer doesn't have one" do

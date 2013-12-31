@@ -99,6 +99,26 @@ module Goods
         id: offer.attribute("id").value
       }
 
+      offer_hash[:available] = if attr = offer.attribute("available")
+                                 !! (attr.value =~ /true/)
+                               else
+                                 true
+                               end
+      {
+        url: "url",
+        currency_id: "currencyId",
+        category_id: "categoryId",
+        picture: "picture",
+        description: "description",
+        name: "name",
+        vendor: "vendor",
+        model: "model"
+      }.each do |property, node|
+        offer_hash[property] = (el = offer.xpath(node).first) ? el.text.strip : nil
+      end
+
+      offer_hash[:price] = offer.xpath("price").first.text.to_f
+
       offer_hash
     end
   end
