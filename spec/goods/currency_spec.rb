@@ -2,9 +2,14 @@ require 'spec_helper'
 
 describe Goods::Currency do
   let(:list) { Goods::CurrenciesList.new }
+  let(:valid_description) { {id: "VAL_CUR", rate: 1, plus: 0} }
+  let(:valid_currency) { Goods::Currency.new(list, valid_description) }
+
+  it_should_behave_like "containable" do
+    let(:element) { valid_currency }
+  end
 
   describe "#valid?" do
-    let(:valid_description) { {id: "VAL_CUR", rate: 1, plus: 0} }
     let(:invalid_description) { {id: "", rate: 0, plus: -1} }
 
     it "should return true for valid currency" do

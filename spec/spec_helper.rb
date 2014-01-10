@@ -3,6 +3,8 @@ require 'nokogiri'
 
 require 'goods'
 
+Dir[File.expand_path("../support/**/*.rb", __FILE__)].each { |f| require f }
+
 RSpec.configure do |config|
   # Limit the spec run to only specs with the focus metadata. If no specs have
   # the filtering metadata and `run_all_when_everything_filtered = true` then

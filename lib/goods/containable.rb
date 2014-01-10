@@ -12,16 +12,8 @@ module Goods
       @id ||= description[:id]
     end
 
-    def rate
-      @rate ||= description[:rate]
-    end
-
-    def plus
-      @plus ||= description[:plus]
-    end
-
     def invalid_fields
-      @invalid_field ||= []
+      @invalid_fields ||= []
     end
 
     private

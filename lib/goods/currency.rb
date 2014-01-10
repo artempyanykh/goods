@@ -7,6 +7,14 @@ module Goods
       self.description = description
     end
 
+    def rate
+      @rate ||= description[:rate]
+    end
+
+    def plus
+      @plus ||= description[:plus]
+    end
+
     def valid?
       reset_validation
 
