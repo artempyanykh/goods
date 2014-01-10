@@ -1,26 +1,10 @@
 module Goods
   class Currency
+    include Containable
+
     def initialize(list, description)
-      @list = list
-      @description = description
-    end
-
-    attr_reader :list
-
-    def id
-      @id ||= @description[:id]
-    end
-
-    def rate
-      @rate ||= @description[:rate]
-    end
-
-    def plus
-      @plus ||= @description[:plus]
-    end
-
-    def invalid_fields
-      @invalid_field ||= []
+      self.list = list
+      self.description = description
     end
 
     def valid?
@@ -33,16 +17,5 @@ module Goods
 
       invalid_fields.empty?
     end
-
-    private
-
-    def reset_validation
-      invalid_fields.clear
-    end
-
-    def validate(field, predicate)
-       invalid_fields << field unless predicate.call(send(field))
-    end
-
   end
 end

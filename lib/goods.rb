@@ -1,5 +1,6 @@
 require "goods/version"
 require "goods/xml"
+require "goods/containable"
 require "goods/container"
 require "goods/categories_list"
 require "goods/category"
