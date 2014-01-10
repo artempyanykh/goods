@@ -1,27 +1,27 @@
 module Goods
   class CurrenciesList
-    def self.find(id)
-
-    end
-
     def initialize(currencies = [])
       currencies.each do |currency|
         add currency
       end
     end
 
-    def add(currency_or_hash)
-      currency = objectify(currency_or_hash)
+    def add(object_or_hash)
+      currency = objectify(object_or_hash)
 
       if currency.valid?
-        items << currency
+        items[currency.id] = currency
       else
         defectives << currency
       end
     end
 
-    def items
-      @items ||= []
+    def find(id)
+      items[id] 
+    end
+
+    def each
+      items.values.each
     end
 
     def defectives
@@ -32,15 +32,17 @@ module Goods
       items.size
     end
 
-
     private
 
+    def items
+      @items ||= {}
+    end
 
-    def objectify(currency_or_hash)
-      if currency_or_hash.kind_of? Currency
-        currency_or_hash
+    def objectify(object_or_hash)
+      if object_or_hash.kind_of? Currency
+        object_or_hash
       else
-        Currency.new(self, currency_or_hash)
+        Currency.new(self, object_or_hash)
       end
     end
   end
