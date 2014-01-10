@@ -1,9 +1,5 @@
 module Goods
   module Containable
-    def list
-      @list
-    end
-
     def description
       @description
     end
@@ -24,10 +20,6 @@ module Goods
 
     def validate(field, predicate)
        invalid_fields << field unless predicate.call(send(field))
-    end
-
-    def list=(list)
-      @list = list
     end
 
     def description=(description)

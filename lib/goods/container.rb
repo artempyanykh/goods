@@ -46,7 +46,7 @@ module Goods
       if object_or_hash.kind_of? self.class._contents_class
         object_or_hash
       else
-        self.class._contents_class.new(self, object_or_hash)
+        self.class._contents_class.new(object_or_hash)
       end
     end
   end

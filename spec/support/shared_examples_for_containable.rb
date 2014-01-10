@@ -1,5 +1,5 @@
 shared_examples "containable" do
-  [:description, :id, :invalid_fields, :list].each do |prop|
+  [:description, :id, :invalid_fields].each do |prop|
     it "should give access to #{prop}" do
       expect(element).to respond_to(prop)
     end
