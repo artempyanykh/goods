@@ -8,5 +8,13 @@ module Goods
         add category
       end
     end
+
+    private
+
+    def prepare(object_or_hash)
+      category = super
+      category.parent = find(category.parent_id) if category.parent_id
+      category
+    end
   end
 end
