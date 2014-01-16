@@ -13,7 +13,7 @@ module Goods
 
     def apply_validation_rules
       validate :id, proc { |val| !(val.nil? || val.empty?) }
-      # validate :name, proc { |val| !(val.nil? || val.empty?) }
+      validate :name, proc { |val| !(val.nil? || val.empty?) }
       validate :parent_id, proc { |parent_id|
         if !(parent_id.nil? || parent_id.empty?)
           parent && (parent.id == parent_id)

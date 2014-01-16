@@ -5,48 +5,53 @@ module Goods
         klass
       end
 
-      include InstanceMethods
+      include ContainerMethods
+      include Enumerable
+      # Need to redefine Enumerable#find
+      include SearchMethods
     end
-  end
 
-  module InstanceMethods
-    def add(object_or_hash)
-      element = prepare(object_or_hash)
+    module ContainerMethods
+      def add(object_or_hash)
+        element = prepare(object_or_hash)
 
-      if element.valid?
-        items[element.id] = element
-      else
-        defectives << element
+        if element.valid?
+          items[element.id] = element
+        else
+          defectives << element
+        end
+      end
+
+      def defectives
+        @defectives ||= []
+      end
+
+      def each(&block)
+        items.values.each(&block)
+      end
+
+      def size
+        items.size
+      end
+
+      private
+
+      def items
+        @items ||= {}
+      end
+
+      def prepare(object_or_hash)
+        if object_or_hash.kind_of? self.class._containable_class
+          object_or_hash
+        else
+          self.class._containable_class.new(object_or_hash)
+        end
       end
     end
 
-    def find(id)
-      items[id] 
-    end
-
-    def each
-      items.values.each
-    end
-
-    def defectives
-      @defectives ||= []
-    end
-
-    def size
-      items.size
-    end
-
-    private
-
-    def items
-      @items ||= {}
-    end
-
-    def prepare(object_or_hash)
-      if object_or_hash.kind_of? self.class._containable_class
-        object_or_hash
-      else
-        self.class._containable_class.new(object_or_hash)
+    module SearchMethods
+      def find(id)
+        items[id]
       end
     end
   end

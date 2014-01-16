@@ -1,3 +1,5 @@
+require "nokogiri"
+
 module Goods
   class XML
     def initialize(string, url = nil, encoding = nil)
