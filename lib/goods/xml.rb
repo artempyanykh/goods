@@ -2,6 +2,8 @@ require "nokogiri"
 
 module Goods
   class XML
+    class InvalidFormatError < StandardError; end
+
     def initialize(string, url = nil, encoding = nil)
       @xml_source = Nokogiri::XML::Document.parse(string, url, encoding)
     end

@@ -3,26 +3,20 @@ require "xml"
 module Goods
   class XML
     class Validator
-      attr_reader :errors
+      attr_reader :error
 
-      def initialize(xml)
-        @xml = xml
-        @errors = []
+      def initialize
+        @error = nil
       end
 
-      def valid?
-        validate
-        errors.empty?
+      def valid?(xml)
+        validate(xml)
+        error.nil?
       end
 
-      private
-
-      def document
-        @document ||= LibXML::XML::Document.string(@xml)
-      end
-
-      def validate
-        errors.clear
+      def validate(xml)
+        @error = nil
+        document = LibXML::XML::Document.string(xml)
 
         # Should silence STDERR, because libxml2 spews validation error
         # to standard error stream
@@ -39,10 +33,12 @@ module Goods
           begin
             document.validate(dtd)
           rescue LibXML::XML::Error => e
-            errors << e.to_s
+            @error = e.to_s
           end
         end
       end
+
+      private
 
       def dtd_path
         File.expand_path("../../../support/shops.dtd", __FILE__)

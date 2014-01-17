@@ -8,16 +8,6 @@ describe Goods::Catalog do
       Goods::Catalog.new(string: "string", url: "url", encoding: "UTF-8")
     end
 
-    it "should call #from_io when url is passed" do
-      expect_any_instance_of(Goods::Catalog).to receive(:from_url).with("url", "UTF-8").once
-      Goods::Catalog.new(url: "url", encoding: "UTF-8")
-    end
-
-    it "should call #from_io when file is passed" do
-      expect_any_instance_of(Goods::Catalog).to receive(:from_file).with("file", "UTF-8").once
-      Goods::Catalog.new(file: "file", encoding: "UTF-8")
-    end
-
     it "should raise error when none of 'string', 'url', 'file' params is passed" do
       expect{ Goods::Catalog.new({}) }.to raise_error(ArgumentError)
     end

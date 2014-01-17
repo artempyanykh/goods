@@ -6,20 +6,20 @@ describe Goods::XML::Validator do
 
   describe "#valid?" do
     it "should return true if document is valid according to dtd" do
-      validator = Goods::XML::Validator.new(valid_document)
-      expect(validator).to be_valid
-      expect(validator.errors).to be_empty
+      validator = Goods::XML::Validator.new
+      expect(validator.valid? valid_document).to eql(true)
+      expect(validator.error).to be_nil
     end
 
     it "should return false if document is not valid" do
-      validator = Goods::XML::Validator.new(invalid_document)
-      expect(validator).not_to be_valid
+      validator = Goods::XML::Validator.new
+      expect(validator.valid? invalid_document).to eql(false)
     end
 
     it "should have non-empty errors if document is not valid" do
-      validator = Goods::XML::Validator.new(invalid_document)
-      validator.valid?
-      expect(validator.errors).not_to be_empty
+      validator = Goods::XML::Validator.new
+      validator.valid? invalid_document
+      expect(validator.error).not_to be_nil
     end
   end
 end
