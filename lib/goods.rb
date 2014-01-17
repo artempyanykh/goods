@@ -1,4 +1,5 @@
 require "goods/version"
+require "goods/xml/validator"
 require "goods/xml"
 require "goods/containable"
 require "goods/container"

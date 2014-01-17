@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE yml_catalog SYSTEM "/Users/rainx/WebstormProjects/partner/pages/help/shops.dtd">
+<yml_catalog date="2010-04-01 17:00">
+    <shop>
+        <currencies>
+        </currencies>
+
+        <categories>
+        </categories>
+
+        <offers>
+        </offers>
+
+    </shop>
+</yml_catalog>
