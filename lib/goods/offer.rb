@@ -1,7 +1,7 @@
 module Goods
   class Offer
     include Containable
-    attr_accessor :category, :currency
+    attr_accessor :category, :currency, :price
     attr_field :category_id
     attr_field :currency_id
     attr_field :available
@@ -13,10 +13,18 @@ module Goods
 
     def initialize(description)
       self.description = description
+      @price = description[:price].to_f
     end
 
-    def price
-      @price ||= description[:price].to_f
+    def convert_currency(other_currency)
+      self.price *= currency.in(other_currency)
+      self.currency = other_currency
+      @currency_id = other_currency.id
+    end
+
+    def change_category(other_category)
+      self.category = other_category
+      @category_id = other_category.id
     end
 
     private

@@ -15,6 +15,10 @@ module Goods
       @categories.prune(level)
     end
 
+    def convert_currency(other_currency)
+      @offers.convert_currency(other_currency)
+    end
+
     private
 
     def from_string(xml_string, url, encoding)

@@ -51,4 +51,37 @@ describe Goods::Offer do
   it "should have floting point price" do
     expect(Goods::Offer.new(price: 5).price).to be_kind_of(Float)
   end
+
+  describe "#convert_currency" do
+    let(:usd) { Goods::Currency.new(id: "USD", rate: 30, plus: 0) }
+
+    it "should change currency" do
+      valid_offer.convert_currency(usd)
+      expect(valid_offer.currency).to be(usd)
+    end
+
+    it "should leave offer valid" do
+      valid_offer.convert_currency(usd)
+      expect(valid_offer).to be_valid
+    end
+
+    it "should change price according to rate" do
+      valid_offer.convert_currency(usd)
+      expect(valid_offer.price).to eql(1.0/3)
+    end
+  end
+
+  describe "#change_category" do
+  let(:printers) { Goods::Category.new(id: "print", name: "Printers") }
+
+    it "should change category to specified one" do
+      valid_offer.change_category(printers)
+      expect(valid_offer.category).to be(printers)
+    end
+
+    it "should leave offer valid" do
+      valid_offer.change_category(printers)
+      expect(valid_offer).to be_valid
+    end
+  end
 end

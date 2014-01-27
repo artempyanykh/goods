@@ -15,8 +15,14 @@ module Goods
     def prune_categories(level)
       self.each do |offer|
         if offer.category.level > level
-          offer.category = offer.category.parent_at_level(level)
+          offer.change_category(offer.category.parent_at_level(level))
         end
+      end
+    end
+
+    def convert_currency(other_currency)
+      self.each do |offer|
+        offer.convert_currency(other_currency)
       end
     end
 

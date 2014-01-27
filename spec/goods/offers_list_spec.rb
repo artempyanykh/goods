@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe Goods::OffersList do
-  let(:categories_list) { Goods::CategoriesList.new([{id: "1", name: "Category"}]) }
-  let(:currencies_list) { Goods::CurrenciesList.new([{id: "RUR", rate: 1, plus: 0}]) }
-  let(:offers_list) { Goods::OffersList.new(categories_list, currencies_list) }
-  let(:subject) { offers_list }
+  let(:categories) { Goods::CategoriesList.new([{id: "1", name: "Category"}]) }
+  let(:currencies) { Goods::CurrenciesList.new([{id: "RUR", rate: 1, plus: 0}]) }
+  let(:offers) { Goods::OffersList.new(categories, currencies) }
+  let(:subject) { offers }
 
   it_should_behave_like "a container",
     Goods::Offer,
     Goods::Offer.new(id: "1", url: "url.com", category_id: "1", currency_id: "RUR", price: 10) do
-      let(:subject) { offers_list }
+      let(:subject) { offers }
     end
 
   describe "#add" do
@@ -17,8 +17,8 @@ describe Goods::OffersList do
       offer = Goods::Offer.new(id: "1", url: "url.com", category_id: "1", currency_id: "RUR", price: 10)
       subject.add(offer)
 
-      expect(offer.category).to be(categories_list.find("1"))
-      expect(offer.currency).to be(currencies_list.find("RUR"))
+      expect(offer.category).to be(categories.find("1"))
+      expect(offer.currency).to be(currencies.find("RUR"))
     end
   end
 
@@ -32,7 +32,7 @@ describe Goods::OffersList do
       list
     end
     let(:offers) do
-      list = Goods::OffersList.new categories, currencies_list, [
+      list = Goods::OffersList.new categories, currencies, [
         {id: "1", category_id: "1", currency_id: "RUR", price: 1},
         {id: "2", category_id: "11", currency_id: "RUR", price: 1},
         {id: "3", category_id: "12", currency_id: "RUR", price: 1}
@@ -52,6 +52,29 @@ describe Goods::OffersList do
     it "should not affect offers with categories having lower level" do
       offers.prune_categories(1)
       expect(offers.find("1").category).to be(categories.find("1"))
+    end
+  end
+
+  describe "#convert_currency" do
+    let(:currencies) do
+      Goods::CurrenciesList.new([
+        {id: "RUR", rate: 1, plus: 0},
+        {id: "USD", rate: 30, plus: 0},
+        {id: "GBP", rate: 50, plus: 0}
+      ])
+    end
+    let(:offers) do
+      list = Goods::OffersList.new categories, currencies, [
+        {id: "1", category_id: "1", currency_id: "USD", price: 1},
+        {id: "2", category_id: "1", currency_id: "GBP", price: 1}
+      ]
+      list
+    end
+
+    it "should convert currency for all offers" do
+      expect(offers.find("1")).to receive(:convert_currency)
+      expect(offers.find("2")).to receive(:convert_currency)
+      offers.convert_currency(currencies.find("RUR"))
     end
   end
 end
