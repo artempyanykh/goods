@@ -9,6 +9,12 @@ module Goods
       end
     end
 
+    def prune(level)
+      level >= 0 or raise ArgumentError, "incorrect level"
+
+      items.delete_if { |k, v| v.level > level }
+    end
+
     private
 
     def prepare(object_or_hash)

@@ -27,4 +27,30 @@ describe Goods::Catalog do
       end
     end
   end
+
+  describe "#prune" do
+    let(:xml) {
+      File.read(File.expand_path("../../fixtures/simple_catalog.xml", __FILE__))
+    }
+    let(:catalog) { Goods::Catalog.new string: xml}
+
+    it "should prune offers and categories" do
+      level = 2
+      expect(catalog.offers).to receive(:prune_categories).with(level)
+      expect(catalog.categories).to receive(:prune).with(level)
+      catalog.prune(level)
+    end
+
+    it "should replace categories of offers" do
+      catalog.prune(0)
+      expect(catalog.offers.find("123").category).to be(
+        catalog.categories.find("1")
+      )
+    end
+
+    it "should remove categories affected by prunning" do
+      catalog.prune(0)
+      expect(catalog.categories.size).to eql(3)
+    end
+  end
 end

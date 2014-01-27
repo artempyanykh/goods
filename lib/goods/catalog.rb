@@ -10,6 +10,11 @@ module Goods
       end
     end
 
+    def prune(level)
+      @offers.prune_categories(level)
+      @categories.prune(level)
+    end
+
     private
 
     def from_string(xml_string, url, encoding)

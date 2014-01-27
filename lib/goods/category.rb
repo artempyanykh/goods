@@ -28,12 +28,9 @@ module Goods
 
     def parent_at_level(level)
       valid_parent_level?(level) or raise ArgumentError.new('incorrect level')
+      return self if self.level == level
 
-      if self.level == level
-        self
-      else
-        @parent_at_level[level] ||= parent.parent_at_level(level)
-      end
+      @parent_at_level[level] ||= parent.parent_at_level(level)
     end
 
     private

@@ -12,6 +12,14 @@ module Goods
       end
     end
 
+    def prune_categories(level)
+      self.each do |offer|
+        if offer.category.level > level
+          offer.category = offer.category.parent_at_level(level)
+        end
+      end
+    end
+
     private
 
     def prepare(object_or_hash)

@@ -6,8 +6,8 @@ describe Goods::Offer do
   let(:valid_description) do
     {id: "1", name: "The Lord of The Rings", category_id: "1", currency_id: "RUR", price: 10} 
   end
-  let(:valid_offer) do 
-    offer = Goods::Offer.new(valid_description) 
+  let(:valid_offer) do
+    offer = Goods::Offer.new(valid_description)
     offer.category = books
     offer.currency = rur
     offer

@@ -21,4 +21,37 @@ describe Goods::OffersList do
       expect(offer.currency).to be(currencies_list.find("RUR"))
     end
   end
+
+  describe "#prune_categories" do
+    let(:categories) do
+      list = Goods::CategoriesList.new [
+        {id: "1", name: "root"},
+        {id: "11", name: "root", parent_id: "1"},
+        {id: "12", name: "root", parent_id: "11"}
+      ]
+      list
+    end
+    let(:offers) do
+      list = Goods::OffersList.new categories, currencies_list, [
+        {id: "1", category_id: "1", currency_id: "RUR", price: 1},
+        {id: "2", category_id: "11", currency_id: "RUR", price: 1},
+        {id: "3", category_id: "12", currency_id: "RUR", price: 1}
+      ]
+      list
+    end
+
+    it "should raise error if level < 0" do
+      expect{ offers.prune_categories }.to raise_error(ArgumentError)
+    end
+
+    it "should replace deep categories with their parents on specified level" do
+      offers.prune_categories(1)
+      expect(offers.find("3").category).to be(categories.find("11"))
+    end
+
+    it "should not affect offers with categories having lower level" do
+      offers.prune_categories(1)
+      expect(offers.find("1").category).to be(categories.find("1"))
+    end
+  end
 end
