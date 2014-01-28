@@ -1,6 +1,7 @@
 <!ELEMENT yml_catalog (shop)>
 <!ATTLIST yml_catalog
-    date CDATA #REQUIRED>
+    date CDATA #REQUIRED
+    count CDATA #IMPLIED>
 
 <!ELEMENT shop (name, company, url, phone?, platform?, version?, agency?, email*, currencies, categories, store?, pickup?, delivery?, deliveryIncluded?, local_delivery_cost?, adult?, offers)>
 <!ELEMENT company (#PCDATA)>
