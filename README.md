@@ -90,8 +90,13 @@ Or install it yourself as:
 		
 		defectives = catalog.offers.defectives # => Array of Goods::Offer
 		defectives.first.invalid_fields # => [:category_id, :currency_id]
+9. **How can I manually validate YML-file against DTD?**:
 		
-9. **Is that all?**
+		validator = Goods::XML::Validator.new
+		validator.valid?(xml_string) # => true or false
+		validator.error # => first validation error
+		
+10. **Is that all?**
 
 	No, it is not. For more information look at the source code.
 	
