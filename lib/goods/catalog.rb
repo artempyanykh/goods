@@ -19,6 +19,10 @@ module Goods
       @offers.convert_currency(other_currency)
     end
 
+    def date
+      @xml.generation_date
+    end
+
     private
 
     def from_string(xml_string, url, encoding)

@@ -20,6 +20,10 @@ module Goods
       @offers ||= extract_offers
     end
 
+    def generation_date      
+      @generation_date ||= extract_catalog_generation_date
+    end
+
 
     private
 
@@ -30,6 +34,10 @@ module Goods
 
     def shop_node
       catalog_node / "shop"
+    end
+
+    def extract_catalog_generation_date
+      Time.parse(catalog_node.attribute("date").value)
     end
 
     # Categories part
