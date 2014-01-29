@@ -45,14 +45,11 @@ module Goods
 
     def category_node_to_hash(category)
       category_hash = {
-        id: category.attribute("id").value,
-        name: category.text
+        id: extract_attribute(category, :id),
+        name: extract_text(category)
       }
-      category_hash[:parent_id] = if category.attribute("parentId")
-                                    category.attribute("parentId").value
-                                  else
-                                    nil
-                                  end
+      category_hash[:parent_id] = extract_attribute(category, "parentId")
+
       category_hash
     end
 
@@ -69,7 +66,7 @@ module Goods
 
     def currency_node_to_hash(currency)
       currency_hash = {
-        id: currency.attribute("id").value
+        id: extract_attribute(currency, "id")
       }
 
       attributes_with_defaults = {
@@ -77,11 +74,7 @@ module Goods
         plus: "0"
       }
       attributes_with_defaults.each do |attr, default|
-        currency_hash[attr] = if currency.attribute(attr.to_s)
-                                currency.attribute(attr.to_s).value
-                              else
-                                default
-                              end
+        currency_hash[attr] = extract_attribute(currency, attr, default)
       end
 
       currency_hash
@@ -100,7 +93,7 @@ module Goods
 
     def offer_node_to_hash(offer)
       offer_hash = {
-        id: offer.attribute("id").value
+        id: extract_attribute(offer, "id")
       }
 
       offer_hash[:available] = if attr = offer.attribute("available")
@@ -117,13 +110,35 @@ module Goods
         name: "name",
         vendor: "vendor",
         model: "model"
-      }.each do |property, node|
-        offer_hash[property] = (el = offer.xpath(node).first) ? el.text.strip : nil
+      }.each do |property, xpath|
+        offer_hash[property] = extract_text(offer, xpath)
       end
 
-      offer_hash[:price] = offer.xpath("price").first.text.to_f
+      offer_hash[:price] = extract_text(offer, "price").to_f
 
       offer_hash
+    end
+
+    def extract_attribute(node, attribute, default = nil)
+      if node.attribute(attribute.to_s)
+        node.attribute(attribute.to_s).value.strip
+      else
+        default
+      end
+    end
+
+    def extract_text(node, xpath = nil, default = nil)
+      target = if xpath
+        node.xpath(xpath).first
+      else
+        node
+      end
+
+      if target
+        target.text.strip
+      else
+        default
+      end
     end
   end
 end
