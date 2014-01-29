@@ -2,16 +2,16 @@ module Goods
   class Currency
     include Containable
 
-    def initialize(description)
-      self.description = description
+    def initialize(info_hash)
+      self._info_hash = info_hash
     end
 
     def rate
-      @rate ||= description[:rate].to_f
+      @rate ||= _info_hash[:rate].to_f
     end
 
     def plus
-      @plus ||= description[:plus].to_f
+      @plus ||= _info_hash[:plus].to_f
     end
 
     def in(other_currency)

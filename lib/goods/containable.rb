@@ -12,19 +12,20 @@ module Goods
           if field = instance_variable_get("@#{field_name}")
             field
           else
-            instance_variable_set("@#{field_name}", description[field_name])
+            instance_variable_set("@#{field_name}", _info_hash[field_name])
             instance_variable_get("@#{field_name}")
           end
         end
       end
     end
 
-    def description
-      @description
+    def _info_hash
+      @_info_hash
     end
+    private :_info_hash
 
     def id
-      @id ||= description[:id]
+      @id ||= _info_hash[:id]
     end
 
     def invalid_fields
@@ -47,8 +48,9 @@ module Goods
        invalid_fields << field unless predicate.call(send(field))
     end
 
-    def description=(description)
-      @description = description
+    def _info_hash=(info_hash)
+      @_info_hash = info_hash
     end
+    private :_info_hash=
   end
 end

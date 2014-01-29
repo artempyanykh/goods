@@ -5,8 +5,8 @@ module Goods
     attr_field :parent_id
     attr_field :name
 
-    def initialize(description)
-      self.description = description
+    def initialize(info_hash)
+      self._info_hash = info_hash
       @parent_at_level = {}
     end
 

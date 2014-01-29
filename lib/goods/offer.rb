@@ -10,11 +10,11 @@ module Goods
     attr_field :name
     attr_field :picture
     attr_field :vendor
-    attr_field :url    
+    attr_field :url
 
-    def initialize(description)
-      self.description = description
-      @price = description[:price].to_f
+    def initialize(info_hash)
+      self._info_hash = info_hash
+      @price = _info_hash[:price].to_f
     end
 
     def convert_currency(other_currency)

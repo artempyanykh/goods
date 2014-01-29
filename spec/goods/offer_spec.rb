@@ -4,7 +4,7 @@ describe Goods::Offer do
   let(:books) { Goods::Category.new(id: "1", name: "Books") }
   let(:rur) { Goods::Currency.new(id: "RUR", rate: 1, plus: 0) }
   let(:valid_description) do
-    {id: "1", name: "The Lord of The Rings", category_id: "1", currency_id: "RUR", price: 10} 
+    {id: "1", name: "The Lord of The Rings", category_id: "1", currency_id: "RUR", price: 10}
   end
   let(:valid_offer) do
     offer = Goods::Offer.new(valid_description)
@@ -46,6 +46,11 @@ describe Goods::Offer do
     it "should have #{field}" do
       expect(valid_offer).to respond_to(field)
     end
+  end
+
+  it "should return offer description, not description hash" do
+    offer = Goods::Offer.new(valid_description.merge(description: "Greatest book"))
+    expect(offer.description).to eql("Greatest book")
   end
 
   it "should have floting point price" do
