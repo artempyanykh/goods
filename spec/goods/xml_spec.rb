@@ -8,6 +8,7 @@ describe Goods::XML do
   SIMPLE_CATALOG_CATEGORIES_COUNT = 9
   SIMPLE_CATALOG_CURRENCIES_COUNT = 3
   SIMPLE_CATALOG_OFFERS_COUNT = 2
+  SIMPLE_CATALOG_GENERATION_TIME = Time.parse("2010-04-01 17:00")
 
   describe "#initialize" do
     it 'should use Nokogiri for parsing' do
@@ -173,6 +174,12 @@ describe Goods::XML do
       it "should have a nil model if offer doesn't have one" do
         expect(book[:model]).to be_nil
       end
+    end
+  end
+
+  describe "#generation_date" do 
+    it "should correctly get yml_catalog date" do      
+      expect(simple_catalog.generation_date).to eq(SIMPLE_CATALOG_GENERATION_TIME)
     end
   end
 end

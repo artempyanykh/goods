@@ -10,6 +10,7 @@ module Goods
     attr_field :name
     attr_field :picture
     attr_field :vendor
+    attr_field :url    
 
     def initialize(description)
       self.description = description
