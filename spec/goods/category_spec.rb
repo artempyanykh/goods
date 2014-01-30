@@ -4,7 +4,7 @@ describe Goods::Category do
   let(:valid_description) { {id: "1", name: "Name"} }
   let(:root) { Goods::Category.new valid_description }
 
-  it_should_behave_like "containable" do
+  it_should_behave_like "element" do
     let(:element) { Goods::Category.new(valid_description) }
   end
 

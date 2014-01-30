@@ -13,7 +13,7 @@ describe Goods::Offer do
     offer
   end
 
-  it_should_behave_like "containable" do
+  it_should_behave_like "element" do
     let(:element) { valid_offer }
   end
 

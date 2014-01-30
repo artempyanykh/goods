@@ -4,7 +4,7 @@ describe Goods::Currency do
   let(:valid_description) { {id: "VAL_CUR", rate: 1, plus: 0} }
   let(:valid_currency) { Goods::Currency.new(valid_description) }
 
-  it_should_behave_like "containable" do
+  it_should_behave_like "element" do
     let(:element) { valid_currency }
   end
 

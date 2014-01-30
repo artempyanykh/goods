@@ -20,7 +20,7 @@ module Goods
       @offers ||= extract_offers
     end
 
-    def generation_date      
+    def generation_date
       @generation_date ||= extract_catalog_generation_date
     end
 

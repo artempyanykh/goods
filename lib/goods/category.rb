@@ -1,12 +1,10 @@
 module Goods
-  class Category
-    include Containable
+  class Category < Element
     attr_accessor :parent
-    attr_field :parent_id
-    attr_field :name
+    attr_field :parent_id, :name
 
     def initialize(info_hash)
-      self._info_hash = info_hash
+      super
       @parent_at_level = {}
     end
 

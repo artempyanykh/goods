@@ -1,21 +1,9 @@
 module Goods
-  class Offer
-    include Containable
+  class Offer < Element
     attr_accessor :category, :currency, :price
-    attr_field :category_id
-    attr_field :currency_id
-    attr_field :available
-    attr_field :description
-    attr_field :model
-    attr_field :name
-    attr_field :picture
-    attr_field :vendor
-    attr_field :url
-
-    def initialize(info_hash)
-      self._info_hash = info_hash
-      @price = _info_hash[:price].to_f
-    end
+    attr_field :category_id, :currency_id, :available, :description,
+               :model, :name, :picture, :vendor, :url
+    attr_field :price, type: :float
 
     def convert_currency(other_currency)
       self.price *= currency.in(other_currency)
@@ -26,6 +14,10 @@ module Goods
     def change_category(other_category)
       self.category = other_category
       @category_id = other_category.id
+    end
+
+    def price=(price)
+      @price = price
     end
 
     private
@@ -40,5 +32,6 @@ module Goods
       }
       validate :price, proc { |price| price && price > 0 }
     end
+
   end
 end
