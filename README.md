@@ -1,4 +1,6 @@
-# Goods
+# Goods 
+
+[![Build Status](https://travis-ci.org/ArtemPyanykh/goods.png?branch=master)](https://travis-ci.org/ArtemPyanykh/goods)
 
 The purpose of this gem is to provide simple, yet reliable solution for parsing
 YML (Yandex Market Language) files, with clean and convenient interface,
