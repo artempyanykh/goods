@@ -9,7 +9,7 @@ describe Goods::Catalog do
       Goods::Catalog.new(io: catalog_io, url: "url", encoding: "UTF-8")
     end
 
-    it "should raise error when none of 'string', 'url', 'file' params is passed" do
+    it "should raise error when no io is passed" do
       expect{ Goods::Catalog.new({}) }.to raise_error(ArgumentError)
     end
   end
