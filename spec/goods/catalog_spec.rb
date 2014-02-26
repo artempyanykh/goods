@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Goods::Catalog do
   describe "#initialize" do
-    it "should call #from_io when string is passed" do
+    it "should call #from_io when io is passed" do
       catalog_io = StringIO.new("string")
       expect_any_instance_of(Goods::Catalog).to receive(:from_io).
-                                                    with(catalog_io, "url", "UTF-8").once
+        with(catalog_io, "url", "UTF-8").once
       Goods::Catalog.new(io: catalog_io, url: "url", encoding: "UTF-8")
     end
 
@@ -44,9 +44,7 @@ describe Goods::Catalog do
 
     it "should replace categories of offers" do
       catalog.prune(0)
-      expect(catalog.offers.find("123").category).to be(
-                                                         catalog.categories.find("1")
-                                                     )
+      expect(catalog.offers.find("123").category).to be(catalog.categories.find("1"))
     end
 
     it "should remove categories affected by prunning" do

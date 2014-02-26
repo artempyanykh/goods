@@ -13,8 +13,8 @@ require "goods/currencies_list"
 require "goods/catalog"
 
 module Goods
-  def self.from_string(xml_string, url=nil, encoding=nil)
-    from_io(StringIO.new(xml_string), url, encoding)
+  def self.from_string(xml_string, encoding=nil)
+    from_io(StringIO.new(xml_string), nil, encoding)
   end
 
   def self.from_url(url, encoding=nil)

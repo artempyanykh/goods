@@ -54,8 +54,8 @@ module Goods
 
     def category_node_to_hash(category)
       category_hash = {
-          id: extract_attribute(category, :id),
-          name: extract_text(category)
+        id: extract_attribute(category, :id),
+        name: extract_text(category)
       }
       category_hash[:parent_id] = extract_attribute(category, "parentId")
 
@@ -75,12 +75,12 @@ module Goods
 
     def currency_node_to_hash(currency)
       currency_hash = {
-          id: extract_attribute(currency, "id")
+        id: extract_attribute(currency, "id")
       }
 
       attributes_with_defaults = {
-          rate: "1",
-          plus: "0"
+        rate: "1",
+        plus: "0"
       }
       attributes_with_defaults.each do |attr, default|
         currency_hash[attr] = extract_attribute(currency, attr, default)
@@ -102,23 +102,24 @@ module Goods
 
     def offer_node_to_hash(offer)
       offer_hash = {
-          id: extract_attribute(offer, "id")
+        id: extract_attribute(offer, "id")
       }
 
       offer_hash[:available] = if attr = offer.attribute("available")
-                                 !! (attr.value =~ /true/)
-                               else
-                                 true
-                               end
+        !! (attr.value =~ /true/)
+      else
+        true
+      end
+
       {
-          url: "url",
-          currency_id: "currencyId",
-          category_id: "categoryId",
-          picture: "picture",
-          description: "description",
-          name: "name",
-          vendor: "vendor",
-          model: "model"
+        url: "url",
+        currency_id: "currencyId",
+        category_id: "categoryId",
+        picture: "picture",
+        description: "description",
+        name: "name",
+        vendor: "vendor",
+        model: "model"
       }.each do |property, xpath|
         offer_hash[property] = extract_text(offer, xpath)
       end
@@ -138,10 +139,10 @@ module Goods
 
     def extract_text(node, xpath = nil, default = nil)
       target = if xpath
-                 node.xpath(xpath).first
-               else
-                 node
-               end
+        node.xpath(xpath).first
+      else
+        node
+      end
 
       if target
         target.text.strip
