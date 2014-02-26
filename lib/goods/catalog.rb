@@ -3,8 +3,8 @@ module Goods
     attr_reader :categories, :currencies, :offers
 
     def initialize(params)
-      if params[:string]
-        from_string(params[:string], params[:url], params[:encoding])
+      if params[:io]
+        from_io(params[:io], params[:url], params[:encoding])
       else
         raise ArgumentError, "should provide either :string or :url param"
       end
@@ -25,9 +25,8 @@ module Goods
 
     private
 
-    def from_string(xml_string, url, encoding)
-      @xml_string = xml_string
-      @xml = XML.new(xml_string, url, encoding)
+    def from_io(xml_io, url, encoding)
+      @xml = XML.new(xml_io, url, encoding)
       @categories = CategoriesList.new(@xml.categories)
       @currencies = CurrenciesList.new(@xml.currencies)
       @offers = OffersList.new(@categories, @currencies, @xml.offers)
