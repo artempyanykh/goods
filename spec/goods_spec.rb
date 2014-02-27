@@ -11,8 +11,13 @@ describe Goods do
 
     it "should return catalog if valid xml io is passed" do
       expect(Goods::Catalog).to receive(:new).
-        with({io: valid_document, url: "url", encoding: "UTF-8"})
-      Goods.from_io(valid_document, "url", "UTF-8")
+        with({io: valid_document, url: "url", encoding: "UTF-8"}).and_call_original
+
+      catalog = Goods.from_io(valid_document, "url", "UTF-8")
+
+      expect(catalog.categories.size).to be > 0
+      expect(catalog.currencies.size).to be > 0
+      expect(catalog.offers.size).to be > 0
     end
 
     it "should raise error if invalid xml io is passed" do
