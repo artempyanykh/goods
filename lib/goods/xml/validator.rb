@@ -16,8 +16,7 @@ module Goods
 
       def validate(xml_io)
         @error = nil
-        @xml_io = xml_io.dup
-        document = LibXML::XML::Document.io(@xml_io)
+        document = LibXML::XML::Document.io(xml_io)
 
         # Should silence STDERR, because libxml2 spews validation error
         # to standard error stream

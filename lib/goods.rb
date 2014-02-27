@@ -34,6 +34,7 @@ module Goods
   def self.from_io(xml_io, url=nil, encoding=nil)
     validator = XML::Validator.new
     if validator.valid? xml_io
+      xml_io.rewind
       Catalog.new(io: xml_io, url: url, encoding: encoding)
     else
       raise XML::InvalidFormatError, validator.error
