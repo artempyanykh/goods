@@ -4,8 +4,8 @@ module Goods
   class XML
     class InvalidFormatError < StandardError; end
 
-    def initialize(string, url = nil, encoding = nil)
-      @xml_source = Nokogiri::XML::Document.parse(string, url, encoding)
+    def initialize(io, url = nil, encoding = nil)
+      @xml_source = Nokogiri::XML::Document.parse(io, url, encoding)
     end
 
     def categories
@@ -105,10 +105,11 @@ module Goods
       }
 
       offer_hash[:available] = if attr = offer.attribute("available")
-                                 !! (attr.value =~ /true/)
-                               else
-                                 true
-                               end
+        !! (attr.value =~ /true/)
+      else
+        true
+      end
+
       {
         url: "url",
         currency_id: "currencyId",

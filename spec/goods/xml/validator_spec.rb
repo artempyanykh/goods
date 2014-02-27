@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe Goods::XML::Validator do
-  let(:valid_document) { File.read(File.expand_path("../../../fixtures/simple_catalog.xml", __FILE__)) }
-  let(:invalid_document) { File.read(File.expand_path("../../../fixtures/empty_catalog.xml", __FILE__)) }
+  let(:valid_document) { open File.expand_path("../../../fixtures/simple_catalog.xml", __FILE__) }
+  let(:invalid_document) { open File.expand_path("../../../fixtures/empty_catalog.xml", __FILE__) }
 
   describe "#valid?" do
     it "should return true if document is valid according to dtd" do

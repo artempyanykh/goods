@@ -9,14 +9,14 @@ module Goods
         @error = nil
       end
 
-      def valid?(xml)
-        validate(xml)
+      def valid?(xml_io)
+        validate(xml_io)
         error.nil?
       end
 
-      def validate(xml)
+      def validate(xml_io)
         @error = nil
-        document = LibXML::XML::Document.string(xml)
+        document = LibXML::XML::Document.io(xml_io)
 
         # Should silence STDERR, because libxml2 spews validation error
         # to standard error stream
