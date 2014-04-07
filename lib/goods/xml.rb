@@ -9,7 +9,9 @@ module Goods
     end
 
     def categories
-      @categories ||= extract_categories
+      @categories ||= begin
+        Util::CategoriesGraph.new(extract_categories).topsorted
+      end
     end
 
     def currencies

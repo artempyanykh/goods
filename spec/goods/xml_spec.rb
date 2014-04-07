@@ -25,21 +25,32 @@ describe Goods::XML do
 
   describe "#categories" do
     let(:categories) { simple_catalog.categories }
+    let(:root_category) {
+      categories.find { |el| el[:parent_id] == nil }
+    }
+    let(:child_category) {
+      categories.find { |el| el[:parent_id] == root_category[:id]}
+    }
 
     it "should extract all categories" do
       expect(categories.count).to eq(SIMPLE_CATALOG_CATEGORIES_COUNT)
     end
 
-    context "category format" do
-      let(:root_category) { categories[0] }
-      let(:child_category) { categories[1] }
+    it "should have root category" do
+      expect(root_category).not_to be_nil
+    end
 
+    it "should have child category" do
+      expect(child_category).not_to be_nil
+    end
+
+    context "category format" do
       it "should have an id" do
-        expect(root_category[:id]).to eq("1")
+        expect(root_category).to have_key(:id)
       end
 
       it "should have a name" do
-        expect(root_category[:name]).to eq("Оргтехника")
+        expect(root_category[:name]).not_to be_empty
       end
 
       it "should have nil parent_id for root category" do
@@ -47,7 +58,7 @@ describe Goods::XML do
       end
 
       it "should have non-nil parent_id for child_category" do
-        expect(child_category[:parent_id]).to eq("1")
+        expect(child_category[:parent_id]).not_to be_nil
       end
     end
 
@@ -177,8 +188,8 @@ describe Goods::XML do
     end
   end
 
-  describe "#generation_date" do 
-    it "should correctly get yml_catalog date" do      
+  describe "#generation_date" do
+    it "should correctly get yml_catalog date" do
       expect(simple_catalog.generation_date).to eq(SIMPLE_CATALOG_GENERATION_TIME)
     end
   end

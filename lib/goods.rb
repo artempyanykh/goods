@@ -2,6 +2,7 @@ require 'open-uri'
 require "goods/version"
 require "goods/xml/validator"
 require "goods/xml"
+require "goods/util"
 require "goods/element"
 require "goods/container"
 require "goods/category"
