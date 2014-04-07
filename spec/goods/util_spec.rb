@@ -96,5 +96,19 @@ describe Goods::Util::CategoriesGraph do
       end
     end
 
+    context "with graph with cycles" do
+      let(:cyclic) {
+        [
+          {id: 1, name: "Kili", parent_id: 3},
+          {id: 2, name: "Fili", parent_id: 1},
+          {id: 3, name: "Dili", parent_id: 2}
+        ]
+      }
+
+      it "should not fail" do
+        graph = klass.new(cyclic)  
+        expect(graph.topsorted).not_to be_nil
+      end
+    end
   end
 end
