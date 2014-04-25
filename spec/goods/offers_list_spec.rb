@@ -13,12 +13,19 @@ describe Goods::OffersList do
     end
 
   describe "#add" do
+    let (:urls) {['url1', 'url2', 'url3']}
+    let (:offer) {Goods::Offer.new(id: "1", url: "url.com", category_id: "1", currency_id: "RUR", price: 10, pictures: urls)}
+
     it "should setup category and currency for offer" do
-      offer = Goods::Offer.new(id: "1", url: "url.com", category_id: "1", currency_id: "RUR", price: 10)
       subject.add(offer)
 
       expect(offer.category).to be(categories.find("1"))
       expect(offer.currency).to be(currencies.find("RUR"))
+    end
+
+    it "should setup pictures array for offer" do
+      expect(offer.pictures).to be_an(Array)
+      expect(offer.pictures).to contain_exactly(*urls)
     end
   end
 
