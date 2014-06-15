@@ -42,7 +42,7 @@ describe Goods::Offer do
     end
   end
 
-  [:available, :description, :model, :name, :picture, :vendor].each do |field|
+  [:available, :description, :model, :name, :pictures, :vendor].each do |field|
     it "should have #{field}" do
       expect(valid_offer).to respond_to(field)
     end

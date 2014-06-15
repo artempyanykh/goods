@@ -150,12 +150,12 @@ describe Goods::XML do
         expect(printer[:category_id]).to eq("100")
       end
 
-      it "should use first picture if there at least one" do
-        expect(printer[:picture]).to eq("http://magazin.ru/img/device1.jpg")
+      it "should have all pictures as array" do
+        expect(printer[:pictures]).to eq(["http://magazin.ru/img/device1.jpg","http://magazin.ru/img/device2.jpg"])
       end
 
-      it "should have a nil picture if offer doesn't have one" do
-        expect(book[:picture]).to be_nil
+      it "should have an empty array of pictures if offer doesn't have one" do
+        expect(book[:pictures].count).to eq(0)
       end
 
       it "should have a description" do

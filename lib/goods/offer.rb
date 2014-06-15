@@ -2,7 +2,7 @@ module Goods
   class Offer < Element
     attr_accessor :category, :currency, :price
     attr_field :category_id, :currency_id, :available, :description,
-               :model, :name, :picture, :vendor, :url
+               :model, :name, :pictures, :vendor, :url
     attr_field :price, type: :float
 
     def convert_currency(other_currency)
