@@ -116,7 +116,6 @@ module Goods
         url: "url",
         currency_id: "currencyId",
         category_id: "categoryId",
-      #  picture: "picture",
         description: "description",
         name: "name",
         vendor: "vendor",
