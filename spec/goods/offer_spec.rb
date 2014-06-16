@@ -17,6 +17,11 @@ describe Goods::Offer do
     let(:element) { valid_offer }
   end
   
+  it "should use first picture if there at least one" do
+    catch_picture = Goods::Offer.new(pictures: ["http://magazin.ru/img/device1.jpg"])
+    expect(catch_picture.picture).to eq("http://magazin.ru/img/device1.jpg")
+  end
+
   describe "#array_of_pictures_setup?" do
     let (:urls) { ['url1', 'url2', 'url3'] }
     let (:offer) { Goods::Offer.new(id: "1", url: "url.com", category_id: "1", currency_id: "RUR", price: 10, pictures: urls) }
