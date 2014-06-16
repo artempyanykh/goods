@@ -4,6 +4,7 @@ module Goods
     attr_field :category_id, :currency_id, :available, :description,
                :model, :name, :picture, :vendor, :url
     attr_field :price, type: :float
+    attr_field :pictures, type: :array
 
     def convert_currency(other_currency)
       self.price *= currency.in(other_currency)
@@ -18,6 +19,10 @@ module Goods
 
     def price=(price)
       @price = price
+    end
+    
+    def picture
+      self.pictures.first
     end
 
     private
