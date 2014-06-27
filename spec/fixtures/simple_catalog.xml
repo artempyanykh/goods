@@ -27,6 +27,7 @@
         </categories>
 
         <local_delivery_cost>300</local_delivery_cost>
+        <cpa>1</cpa>
 
         <offers>
             <offer id=" 123 " type="vendor.model" bid="13" cbid="20">
@@ -56,6 +57,7 @@
                 <description>A4, 64Mb, 600x600 dpi, USB 2.0, 29стр/мин ч/б / 15стр/мин цв, лотки на 100л и 250л, плотность до 175г/м, до 60000 стр/месяц </description>
                 <manufacturer_warranty>true</manufacturer_warranty>
                 <country_of_origin>Япония</country_of_origin>
+                <cpa>0</cpa>
             </offer>
 
             <offer id="1234" type="book" bid="17" available="false">

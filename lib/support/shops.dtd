@@ -1,9 +1,8 @@
 <!ELEMENT yml_catalog (shop)>
 <!ATTLIST yml_catalog
-    date CDATA #REQUIRED
-    count CDATA #IMPLIED>
+    date CDATA #REQUIRED>
 
-<!ELEMENT shop (name, company, url, phone?, platform?, version?, agency?, email*, currencies, categories, store?, pickup?, delivery?, deliveryIncluded?, local_delivery_cost?, adult?, offers)>
+<!ELEMENT shop (name, company, url, phone?, platform?, version?, agency?, email*, currencies, categories, store?, pickup?, delivery?, deliveryIncluded?, local_delivery_cost?, adult?, cpa?, offers)>
 <!ELEMENT company (#PCDATA)>
 <!ELEMENT phone (#PCDATA)>
 
@@ -38,6 +37,7 @@
                  manufacturer_warranty?, country_of_origin?, downloadable?, adult?,
                  age?,
                  barcode*,
+                 cpa?,
                  param*,
                  related_offer*
                 )>
@@ -145,5 +145,5 @@
 <!ELEMENT is_premiere (#PCDATA)>
 <!ELEMENT is_kids (#PCDATA)>
 <!ELEMENT date (#PCDATA)>
-
+<!ELEMENT cpa (#PCDATA)>
 
