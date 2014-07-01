@@ -150,8 +150,8 @@ describe Goods::XML do
         expect(printer[:category_id]).to eq("100")
       end
 
-      it "should use first picture if there at least one" do
-        expect(printer[:picture]).to eq("http://magazin.ru/img/device1.jpg")
+      it "should set pictures array" do
+        expect(printer[:pictures].count).to eq(2)
       end
 
       it "should have a nil picture if offer doesn't have one" do

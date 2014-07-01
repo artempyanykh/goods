@@ -116,7 +116,6 @@ module Goods
         url: "url",
         currency_id: "currencyId",
         category_id: "categoryId",
-        picture: "picture",
         description: "description",
         name: "name",
         vendor: "vendor",
@@ -125,9 +124,17 @@ module Goods
         offer_hash[property] = extract_text(offer, xpath)
       end
 
+      offer_hash[:pictures] = extract_text_elements(offer, "picture")
+
       offer_hash[:price] = extract_text(offer, "price").to_f
 
       offer_hash
+    end
+    
+    def extract_text_elements(node, element_name)
+      node.xpath(element_name).map do |element|
+        extract_text(element)
+      end
     end
 
     def extract_attribute(node, attribute, default = nil)

@@ -66,7 +66,7 @@ module Goods
 
     def setup_instance_variable(name, type)
       case type
-      when :string
+      when :string, :array
         instance_variable_set("@#{name}", @info_hash[name])
       when :float
         instance_variable_set("@#{name}", @info_hash[name].to_f)

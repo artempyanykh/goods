@@ -16,6 +16,21 @@ describe Goods::Offer do
   it_should_behave_like "element" do
     let(:element) { valid_offer }
   end
+  
+  it "should use first picture if there at least one" do
+    catch_picture = Goods::Offer.new(pictures: ["http://magazin.ru/img/device1.jpg"])
+    expect(catch_picture.picture).to eq("http://magazin.ru/img/device1.jpg")
+  end
+
+  describe "#array_of_pictures_setup?" do
+    let (:urls) { ['url1', 'url2', 'url3'] }
+    let (:offer) { Goods::Offer.new(id: "1", url: "url.com", category_id: "1", currency_id: "RUR", price: 10, pictures: urls) }
+    
+    it "should setup pictures array for offer" do
+      expect(offer.pictures).to be_an(Array)
+      expect(offer.pictures).to contain_exactly(*urls)
+    end
+  end
 
   describe "#valid?" do
     context "invalid cases" do
@@ -42,7 +57,7 @@ describe Goods::Offer do
     end
   end
 
-  [:available, :description, :model, :name, :picture, :vendor].each do |field|
+  [:available, :description, :model, :name, :picture, :pictures, :vendor].each do |field|
     it "should have #{field}" do
       expect(valid_offer).to respond_to(field)
     end
