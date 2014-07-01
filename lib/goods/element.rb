@@ -69,9 +69,18 @@ module Goods
       when :string
         instance_variable_set("@#{name}", @info_hash[name])
       when :float
-        instance_variable_set("@#{name}", @info_hash[name].to_f)
+        data = transform_instance(@info_hash[name]) { |value| value.to_f }
+        instance_variable_set("@#{name}", data)
       else
         raise ArgumentError, 'wrong type'
+      end
+    end
+
+    def transform_instance(data)
+      if data.is_a?(Array) 
+        data.map { |value| yield value }
+      else
+        yield data 
       end
     end
   end

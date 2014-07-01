@@ -116,13 +116,19 @@ module Goods
         url: "url",
         currency_id: "currencyId",
         category_id: "categoryId",
-        picture: "picture",
         description: "description",
         name: "name",
         vendor: "vendor",
         model: "model"
       }.each do |property, xpath|
         offer_hash[property] = extract_text(offer, xpath)
+      end
+
+      # Parse offer's nodes with multiply nodes
+      {
+        pictures: "picture"
+      }.each do |property, xpath|
+        offer_hash[property] = extract_multiple_nodes_text(offer, xpath)
       end
 
       offer_hash[:price] = extract_text(offer, "price").to_f
@@ -151,5 +157,13 @@ module Goods
         default
       end
     end
+
+    def extract_multiple_nodes_text(node, xpath)
+      node.xpath(xpath).map do |subnode|
+        puts xpath,extract_text(subnode)
+        extract_text(subnode)
+      end
+    end
+
   end
 end
