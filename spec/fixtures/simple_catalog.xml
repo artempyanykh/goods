@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE yml_catalog SYSTEM "/Users/rainx/WebstormProjects/partner/pages/help/shops.dtd">
+<!DOCTYPE yml_catalog SYSTEM "../../lib/support/shops.dtd">
 <yml_catalog date="2010-04-01 17:00">
     <shop>
         <name>Magazin</name>
@@ -54,6 +54,8 @@
                 <model>
                   Color LaserJet 3000
                 </model>
+                <param name="Voltage" unit="V">220</param>
+                <param name="Amperage" unit="A">5</param>
                 <description>A4, 64Mb, 600x600 dpi, USB 2.0, 29стр/мин ч/б / 15стр/мин цв, лотки на 100л и 250л, плотность до 175г/м, до 60000 стр/месяц </description>
                 <manufacturer_warranty>true</manufacturer_warranty>
                 <country_of_origin>Япония</country_of_origin>
@@ -76,6 +78,7 @@
                 <ISBN>978-5-699-23647-3</ISBN>
                 <volume>2</volume>
                 <part>1</part>
+                <param name="Rate" unit="">PG-18</param>
                 <language>rus</language>
                 <binding>70x90/32</binding>
                 <page_extent>288</page_extent>
