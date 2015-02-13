@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE yml_catalog SYSTEM "/Users/rainx/WebstormProjects/partner/pages/help/shops.dtd">
+<!DOCTYPE yml_catalog SYSTEM "../../lib/support/shops.dtd">
 <yml_catalog date="2010-04-01 17:00">
     <shop>
         <name>Magazin</name>
