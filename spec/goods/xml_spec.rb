@@ -142,6 +142,10 @@ describe Goods::XML do
         expect(printer[:price]).to eq(15000.00)
       end
 
+      it "should have a params" do
+        expect(printer[:params]).to eql([{ name: "Voltage", unit: "V", value: "220" }, { name: "Amperage", unit: "A", value: "5" }])
+      end
+
       it "should have a currency_id" do
         expect(printer[:currency_id]).to eq("RUR")
       end

@@ -125,9 +125,21 @@ module Goods
         offer_hash[property] = extract_text(offer, xpath)
       end
 
+      offer_hash[:params] = extract_params(offer)
+
       offer_hash[:price] = extract_text(offer, "price").to_f
 
       offer_hash
+    end
+
+    def extract_params(node)
+      node.xpath('param').map do |item|
+        attributes_to_hash(item).merge(:value => item.content)
+      end
+    end
+
+    def attributes_to_hash(node)
+      Hash[(node.keys.map(&:to_sym)).zip(node.values.map(&:strip))]
     end
 
     def extract_attribute(node, attribute, default = nil)
