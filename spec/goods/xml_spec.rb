@@ -154,6 +154,10 @@ describe Goods::XML do
         expect(printer[:picture]).to eq("http://magazin.ru/img/device1.jpg")
       end
 
+      it "should set pictures array" do
+        expect(printer[:pictures].count).to eq(2)
+      end
+
       it "should have a nil picture if offer doesn't have one" do
         expect(book[:picture]).to be_nil
       end
